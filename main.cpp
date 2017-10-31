@@ -21,19 +21,23 @@ void keyboard(unsigned char c, int x, int y) {
 void render() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	glLineWidth(1);
-	glColor3f(1.0, 0.0, 0.0);
-	glBegin(GL_LINES);
-		glVertex2f(-1, 0);
-		glVertex2f(1, 0);
-	glEnd();
-
-	glLineWidth(1);
-	glColor3f(1.0, 0.0, 0.0);
-	glBegin(GL_LINES);
-		glVertex2f(0, -1);
-		glVertex2f(0, 1);
-	glEnd();
+	for (GLfloat i = -1; i <= 1; i += 0.1) {
+		glLineWidth(1);
+		glColor3f(1.0, 0.0, 0.0);
+		glBegin(GL_LINES);
+			glVertex2f(-1, i);
+			glVertex2f(1, i);
+		glEnd();
+	
+		glLineWidth(1);
+		glColor3f(1.0, 0.0, 0.0);
+		glBegin(GL_LINES);
+			glVertex2f(i, -1);
+			glVertex2f(i, 1);
+		glEnd();
+	}
+	
+	
 
 	glColor3f(1.0, 1.0, 1.0);
 	glBegin(GL_TRIANGLES);
