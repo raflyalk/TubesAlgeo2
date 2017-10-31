@@ -1,16 +1,20 @@
 #if defined(_WIN32)
 #include <iostream>
+#include <stdio.h>
 #include <GL\glut.h>
 #include <GL\GL.h>
 #include <GL\GLU.h>
 
 #elif defined(__APPLE__)
 #include <iostream>
+#include <stdio.h>
 #include <GLUT/glut.h>
 #include <OpenGL/GL.h>
 #include <OpenGL/GLU.h>
 
 #endif
+
+int N, x[100], y[100];
 
 void keyboard(unsigned char c, int x, int y) {
 	if (c == 27) {
@@ -40,10 +44,11 @@ void render() {
 	
 
 	glColor3f(1.0, 1.0, 1.0);
-	glBegin(GL_TRIANGLES);
-		glVertex2f(0, 0);
-		glVertex2f(0.5, 0);
-		glVertex2f(0, 0.5);
+	glBegin(GL_POLYGON);
+		for (int i = 1; i <= N; i++) {
+			glVertex2f(x[i], y[i]);
+		}
+		
 	glEnd();
 	glutSwapBuffers();
 }
@@ -62,6 +67,12 @@ int main(int argc, char** argv) {
 	glutInitWindowPosition(100, 100);
 	glutCreateWindow("My OpenGL-Window");
 	
+	
+	scanf_s("%d", &N);
+	for (int i = 1; i <= N; i++) {
+		scanf_s("%d %d", &x[i], &y[i]);
+	}
+
 	glutDisplayFunc(render);
 	glutKeyboardFunc(keyboard);
 	glutMouseFunc(mouse);
